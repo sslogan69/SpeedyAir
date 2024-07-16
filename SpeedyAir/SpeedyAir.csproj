@@ -8,11 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Orders\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+     <Content Include="Orders\orders.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

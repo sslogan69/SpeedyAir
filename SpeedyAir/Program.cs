@@ -20,7 +20,7 @@ namespace SpeedyAir
                 orderManager.PrintFlightSchedule();
 
                 // Load orders from JSON file
-                string ordersJsonPath = "orders.json";
+                string ordersJsonPath = "Orders/orders.json";
                 orderManager.LoadOrders(ordersJsonPath);
 
                 // Schedule orders
