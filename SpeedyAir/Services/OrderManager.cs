@@ -35,8 +35,9 @@ namespace SpeedyAir.Services
 
                 foreach (var order in orderDictionary)
                 {
-                    orders.Add(new Order { OrderId = order.Key, Destination = order.Value["destination"] });
+                    orders.Add(new Order { OrderId = order.Key, Destination = order.Value["destination"], Service = order.Value["service"] });
                 }
+                
             }
             catch (JsonException)
             {
@@ -96,7 +97,7 @@ namespace SpeedyAir.Services
                     if (order.FlightNumber.HasValue)
                     {
                         var assignedFlight = order.FlightNumber != null ? order.FlightNumber.ToString() : "not scheduled";
-                        Console.WriteLine($"Order: {order.OrderId}, FlightNumber: {assignedFlight}, Departure: YUL, Arrival: {order.Destination}, Day: {(assignedFlight != "not scheduled" ? flights.Find(f => f.FlightNumber == order.FlightNumber).Day.ToString() : "N/A")}");
+                        Console.WriteLine($"Order: {order.OrderId}, FlightNumber: {assignedFlight}, Departure: YUL, Arrival: {order.Destination}, Day: {(assignedFlight != "not scheduled" ? flights.Find(f => f.FlightNumber == order.FlightNumber).Day.ToString() : "N/A")}, Service: {order.Service} ");
                     }
                     else
                     {
@@ -107,6 +108,28 @@ namespace SpeedyAir.Services
             catch (Exception ex)
             {
                 Console.WriteLine("Error: Unable to list print order itineraries. Please try again or contact support if the problem persists.");
+                Console.WriteLine($"Details: {ex.Message}");
+            }
+        }
+
+        public void PrintShipOrders()
+        {
+            try
+            {
+                var flightid = 5;
+                var flight = flights.Find(f => f.FlightNumber == flightid);
+                Console.WriteLine($"Flight: {flight.FlightNumber}, departure: {flight.DepartureCity}, arrival: {flight.ArrivalCity}, day: {flight.Day}");
+                var ord = orders.Where(x => x.FlightNumber == flightid).ToList(); 
+                foreach (var order in ord)
+                {
+                    Console.WriteLine($"Order: {order.OrderId}, FlightNumber: {order.FlightNumber}");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: Unable to list print ship orders . Please try again or contact support if the problem persists.");
                 Console.WriteLine($"Details: {ex.Message}");
             }
         }

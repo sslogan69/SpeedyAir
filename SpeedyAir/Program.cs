@@ -29,6 +29,9 @@ namespace SpeedyAir
                 // Print order itineraries
                 Console.WriteLine("\nOrder Itineraries:");
                 orderManager.PrintOrderItineraries();
+
+                Console.WriteLine("\n Shipping Management");
+                orderManager.PrintShipOrders();
             }
             catch (Exception ex)
             {
