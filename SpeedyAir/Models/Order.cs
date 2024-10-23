@@ -10,6 +10,7 @@ namespace SpeedyAir.Models
     {
         public string? OrderId { get; set; }
         public string? Destination { get; set; }
+        public string? Service { get; set; }
         public int? FlightNumber { get; set; }
     }
 }
